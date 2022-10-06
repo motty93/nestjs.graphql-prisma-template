@@ -6,6 +6,8 @@ import { join } from 'path'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { AppResolver } from './app.resolver'
+import { AuthorsModule } from './authors/authors.module'
+import { PostsModule } from './posts/posts.module'
 
 @Module({
   imports: [
@@ -25,6 +27,8 @@ import { AppResolver } from './app.resolver'
       },
       context: ({ req, res }) => ({ req, res }),
     }),
+    AuthorsModule,
+    PostsModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver],
