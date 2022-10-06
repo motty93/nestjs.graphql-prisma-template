@@ -24,7 +24,7 @@ export class AuthorsResolver {
   }
 
   @ResolveField(() => [PostDTO])
-  async posts(@Parent() author: AuthorDTO) {
+  async posts(@Parent() author: AuthorDTO): Promise<PostDTO[]> {
     const { id } = author
 
     return await this.postsService.findAll(id)
