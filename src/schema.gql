@@ -2,10 +2,24 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Author {
+  firstName: String
+  id: ID!
+  lastName: String
+  posts: [Post!]!
+}
+
 type PongPayload {
   status: String!
 }
 
+type Post {
+  id: ID!
+  title: String!
+  votes: Int
+}
+
 type Query {
+  author(id: ID!): Author!
   ping: PongPayload!
 }
