@@ -30,9 +30,10 @@ model Post {
   createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
   updatedAt    DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
 
-  authorId String @map("user_id") @db.Uuid
-  title    String
-  votes    Int?   @default(0)
+  authorId  String    @map("user_id") @db.Uuid
+  title     String
+  votes     Int?      @default(0)
+  deletedAt DateTime? @map("deleted_at") @db.Timestamptz(6)
 
   author Author @relation(fields: [authorId], references: [id], onUpdate: Restrict)
 }
