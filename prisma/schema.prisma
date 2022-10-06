@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator nestgraphql {
+  provider        = "prisma-client-js"
+  previewFeatures = ["interactiveTransactions"]
+}
+
+model Author {
+  id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  sequentialId Int      @unique @default(autoincrement()) @map("sequential_id")
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt    DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  firstName String @map("first_name")
+  lastName  String @map("last_name")
+
+  posts Post[]
+}
+
+model Post {
+  id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  sequentialId Int      @unique @default(autoincrement()) @map("sequential_id")
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt    DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  authorId String @map("user_id") @db.Uuid
+  title    String
+  votes    Int?   @default(0)
+
+  author Author @relation(fields: [authorId], references: [id], onUpdate: Restrict)
+}
