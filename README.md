@@ -26,48 +26,87 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Installation
+## Getting start
 
 ```bash
-$ npm install
+$ chmod -R +x ./scripts
+
+$ yarn
+
+$ yarn start:dev
+```
+
+## Setting the storage
+
+```bash
+# build image
+$ yarn storage:build
+
+# start db container
+$ yarn storage:start
+
+# stop db container
+$ yarn storage:stop
+
+# restart db container
+$ yarn storage:restart
+
+# clear db
+$ yarn storage:clear
 ```
 
 ## Running the app
 
 ```bash
-# development
-$ npm run start
+# dev watch mode
+$ yarn start:dev
 
-# watch mode
-$ npm run start:dev
+# debug mode
+$ yarn start:debug
+```
 
-# production mode
-$ npm run start:prod
+## Operate the database
+
+```bash
+# migrate all
+$ yarn db:migrate
+
+# open prisma GUI
+$ yarn db:studio
+
+# db reset
+$ yarn db:migrate:reset
+
+# db seed
+$ yarn db:seed
+```
+
+## GraphQL GUI
+```bash
+# for mac
+$ open http://localhost:8100/graphql
+
+or
+
+# for linux
+$ xdg-open http://localhost:8100/graphql
 ```
 
 ## Test
 
 ```bash
 # unit tests
-$ npm run test
+$ yarn test
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+# ファイル指定 ex.users.resolver
+$ yarn test src/users/users.resolver.spec.ts
 ```
 
-## Support
+テストデータはfakerを使用(`src/common/factories`へ作成)
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+https://fakerjs.dev/guide/
 
-## Stay in touch
+## 参考
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+- 設計: [https://github.com/notiz-dev/nestjs-prisma-starter]
+- debug: [https://note.com/seiji_spm/n/n2f9b7ef1a0be#aFUsb]
