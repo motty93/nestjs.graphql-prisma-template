@@ -5,6 +5,9 @@
   "author": "motty93",
   "private": true,
   "license": "UNLICENSED",
+  "engines": {
+    "node": "16.17.0"
+  },
   "prisma": {
     "seed": "./scripts/seeds/dev.sh"
   },

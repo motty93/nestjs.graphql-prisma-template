@@ -5,7 +5,6 @@ const main = async () => {
   const author = await prisma.author.findUnique({
     where: { sequentialId: 1 },
   })
-  console.log(author.id)
   const post = await prisma.post.create({
     data: {
       title: 'test post',
