@@ -4,6 +4,7 @@ import { PostsModule } from '~/posts/posts.module'
 import { PrismaModule } from '~/prisma/prisma.module'
 import { PrismaService } from '~/prisma/prisma.service'
 import { AuthorsResolver } from './authors.resolver'
+import { AuthorDTO } from './dto'
 
 describe('AuthorsResolver', () => {
   let resolver: AuthorsResolver
@@ -44,10 +45,14 @@ describe('AuthorsResolver', () => {
   describe('author', () => {
     it('success', async () => {
       const ret = await resolver.author(author.id)
+      const resolveFieldPosts = await resolver.posts({
+        id: ret.id,
+      } as AuthorDTO)
 
       expect(ret.firstName).toBe(author.firstName)
       expect(ret.lastName).toBe(author.lastName)
-      expect(ret.posts)
+      expect(resolveFieldPosts.length).toBe(1)
+      expect(resolveFieldPosts[0].title).toBe('test post')
     })
   })
 })
